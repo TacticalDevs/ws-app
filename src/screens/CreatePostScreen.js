@@ -1,5 +1,14 @@
-import { View, Text, StyleSheet, Image, TextInput, Button } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TextInput,
+  Button,
+  KeyboardAvoidingView
+} from 'react-native';
 import { useState } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const user = {
   id: 'u1',
@@ -10,13 +19,20 @@ const user = {
 
 const CreatePostScreen = () => {
   const [description, setDescription] = useState('');
+  // const insets = useSafeAreaInsets();
 
   const onSubmit = () => {
     console.warn(description);
+    setDescription('');
   };
-
+  // style={[styles.container, { marginBottom: insets.bottom }]}
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={[styles.container, { marginBottom: 30 }]}
+      contentContainerStyle={{ flex: 1 }}
+      keyboardVerticalOffset={150}
+    >
       <View style={styles.header}>
         <Image source={{ uri: user.image }} style={styles.image} />
         <Text style={styles.name}>{user.name}</Text>
@@ -28,8 +44,10 @@ const CreatePostScreen = () => {
         placeholder="what is on your mind?"
         multiline
       />
-      <Button title="Post" onPress={onSubmit} />
-    </View>
+      <View style={styles.buttonContainer}>
+        <Button title="Post" onPress={onSubmit} />
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -58,5 +76,8 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: '500'
+  },
+  buttonContainer: {
+    marginTop: 'auto'
   }
 });
