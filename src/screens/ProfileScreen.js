@@ -19,7 +19,8 @@ import FeedPost from '../components/FeedPost';
 
 import user from '../../assets/data/user.json';
 const dummy_img = 'https://reactnative-assets.s3.amazonaws.com/IMG_8666.jpeg';
-const bg = 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg';
+const bg =
+  'https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80';
 
 const profilePictureWidth = Dimensions.get('window').width * 0.4;
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -53,7 +54,10 @@ const ProfileScreenHeader = ({ user, isMe = false }) => {
               </Text>
             </Pressable>
 
-            <Pressable style={styles.button}>
+            <Pressable
+              style={styles.button}
+              onPress={() => navigation.navigate('Update Profile')}
+            >
               <MaterialCommunityIcons name="pencil" size={16} color="#000" />
               <Text style={styles.buttonText}>Edit Profile</Text>
             </Pressable>
