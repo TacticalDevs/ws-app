@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Entypo } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import { useNavigation } from '@react-navigation/native';
 
 const user = {
   id: 'u1',
@@ -23,11 +24,14 @@ const CreatePostScreen = () => {
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
 
+  const navigation = useNavigation();
+
   // const insets = useSafeAreaInsets();
 
   const onSubmit = () => {
     console.warn(description);
     setDescription('');
+    navigation.goBack();
   };
 
   const pickImage = async () => {
