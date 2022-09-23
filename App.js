@@ -1,22 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import FeedPost from './src/components/FeedPost';
+import { StyleSheet, View } from 'react-native';
+import Navigator from './src/navigation';
 
 const App = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <FeedPost />
+      <Navigator />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+    flex: 1
   }
 });
 
