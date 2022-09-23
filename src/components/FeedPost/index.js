@@ -8,14 +8,19 @@ import {
 import { useState } from 'react';
 import LikeImage from '../../../assets/images/like.png';
 import styles from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 const FeedPost = (props) => {
   const { post } = props;
   const [isLiked, setIsLiked] = useState(false);
+  const navigation = useNavigation();
 
   return (
     <View style={styles.post}>
-      <View style={styles.header}>
+      <Pressable
+        onPress={() => navigation.navigate('Profile', { id: post.User.id })}
+        style={styles.header}
+      >
         <Image source={{ uri: post.User.image }} style={styles.profileImage} />
         <View>
           <Text style={styles.name}>{post.User.name}</Text>
@@ -27,7 +32,7 @@ const FeedPost = (props) => {
           color="grey"
           style={styles.icon}
         />
-      </View>
+      </Pressable>
 
       {/* Body */}
       {post.description && (
