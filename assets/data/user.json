@@ -1,15 +1,15 @@
 {
   "id": "u1",
-  "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.jpg",
-  "name": "Vadim Savin",
+  "image": "https://reactnative-assets.s3.amazonaws.com/IMG_8666.jpeg",
+  "name": "Abe.Dev",
   "posts": [
     {
       "id": "p1",
       "createdAt": "4 m",
       "User": {
         "id": "u1",
-        "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.jpg",
-        "name": "Vadim Savin"
+        "image": "https://reactnative-assets.s3.amazonaws.com/IMG_8666.jpeg",
+        "name": "Abe.Dev"
       },
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
       "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg",
@@ -21,11 +21,11 @@
       "createdAt": "1 d",
       "User": {
         "id": "u1",
-        "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim1.JPG",
-        "name": "Vadim Savin"
+        "image": "https://reactnative-assets.s3.amazonaws.com/IMG_8666.jpeg",
+        "name": "Abe.Dev"
       },
-      "description": "Merch for the Real notJust Developers",
-      "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/pinterest/0.jpeg",
+      "description": "Grinding! 👨🏻‍💻",
+      "image": "https://reactnative-assets.s3.amazonaws.com/IMG_9795+Small.jpeg",
       "numberOfLikes": 54,
       "numberOfShares": 8
     },
@@ -34,10 +34,10 @@
       "createdAt": "1 d",
       "User": {
         "id": "u1",
-        "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim1.JPG",
-        "name": "Vadim Savin"
+        "image": "https://reactnative-assets.s3.amazonaws.com/IMG_8666.jpeg",
+        "name": "Abe.Dev"
       },
-      "description": "Lovely",
+      "description": "Lorem Ipsum is just a placeholder text used to test the typesetting effect and has no actual meaning. It's merely a generic text used to hold a place in a file until the actual text or visuals are created to replace it.",
       "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/vertical-images/4.jpeg",
       "numberOfLikes": 54,
       "numberOfShares": 8
