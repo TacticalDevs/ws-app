@@ -17,6 +17,9 @@ import {
 } from '@expo/vector-icons';
 import FeedPost from '../components/FeedPost';
 
+/// ==== AWS
+import { Auth } from 'aws-amplify';
+
 import user from '../../assets/data/user.json';
 const dummy_img = 'https://reactnative-assets.s3.amazonaws.com/IMG_8666.jpeg';
 const bg =
@@ -29,7 +32,7 @@ const ProfileScreenHeader = ({ user, isMe = false }) => {
   const navigation = useNavigation();
 
   const signOut = async () => {
-    console.warn('Sign out');
+    Auth.signOut();
   };
 
   if (!user) {
