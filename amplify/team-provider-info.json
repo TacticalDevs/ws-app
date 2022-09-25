@@ -10,6 +10,11 @@
       "StackName": "amplify-tacticaldevswsapp-staging-15636",
       "StackId": "arn:aws:cloudformation:us-east-1:475863003495:stack/amplify-tacticaldevswsapp-staging-15636/1f6882b0-3bac-11ed-bd54-122d622f4417",
       "AmplifyAppId": "doyjebgg2srq2"
+    },
+    "categories": {
+      "auth": {
+        "tacticaldevswsapp": {}
+      }
     }
   }
 }
