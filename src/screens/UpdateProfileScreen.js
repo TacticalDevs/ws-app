@@ -13,8 +13,24 @@ import {
 
 import * as ImagePicker from 'expo-image-picker';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { API, Auth, graphqlOperation } from 'aws-amplify';
 
 const dummyImage = 'https://reactnative-assets.s3.amazonaws.com/user.png';
+
+const createUser = `
+  mutation CreateUser($input: CreateUserInput!) {
+    createUser(input: $input) {
+      id
+      createdAt
+      updatedAt
+      name
+      image
+      _version
+      _lastChangedAt
+      _deleted
+    }
+  }
+`;
 
 const UpdateProfileScreen = () => {
   const [name, setName] = useState('');
@@ -34,8 +50,16 @@ const UpdateProfileScreen = () => {
     }
   };
 
-  const onSave = () => {
-    console.warn('saving...');
+  const onSave = async () => {
+    // user sub name from AWS Cognito
+    const userData = await Auth.currentAuthenticatedUser();
+    const newUser = {
+      id: userData.attributes.sub,
+      name,
+      _version: 1
+    };
+
+    await API.graphql(graphqlOperation(createUser, { input: newUser }));
   };
 
   return (

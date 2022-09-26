@@ -13,6 +13,10 @@ import { Entypo } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
 
+// ===== AWS
+import { DataStore, Auth } from 'aws-amplify';
+import { Post } from '../models';
+
 const user = {
   id: 'u1',
   image:
@@ -28,9 +32,21 @@ const CreatePostScreen = () => {
 
   // const insets = useSafeAreaInsets();
 
-  const onSubmit = () => {
-    console.warn(description);
+  const onSubmit = async () => {
+    const userData = await Auth.currentAuthenticatedUser();
+
+    const newPost = new Post({
+      description: description,
+      // image,
+      numberOfLikes: 0,
+      numberOfShares: 0,
+      postUserId: userData.attributes.sub,
+      _version: 1 // optional datastore will handle this
+    });
+
+    await DataStore.save(newPost);
     setDescription('');
+    setImage(null);
     navigation.goBack();
   };
 
