@@ -41,11 +41,12 @@ const CreatePostScreen = () => {
       numberOfLikes: 0,
       numberOfShares: 0,
       postUserId: userData.attributes.sub,
-      _version: 1
+      _version: 1 // optional datastore will handle this
     });
 
     await DataStore.save(newPost);
     setDescription('');
+    setImage(null);
     navigation.goBack();
   };
 

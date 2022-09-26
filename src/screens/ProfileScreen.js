@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -6,7 +7,8 @@ import {
   ActivityIndicator,
   Dimensions,
   FlatList,
-  Pressable
+  Pressable,
+  Alert
 } from 'react-native';
 import {
   AntDesign,
@@ -18,9 +20,9 @@ import {
 import FeedPost from '../components/FeedPost';
 
 /// ==== AWS
-import { Auth } from 'aws-amplify';
+import { Auth, DataStore } from 'aws-amplify';
+import { User, Post } from '../models';
 
-import user from '../../assets/data/user.json';
 const dummy_img = 'https://reactnative-assets.s3.amazonaws.com/IMG_8666.jpeg';
 const bg =
   'https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80';
@@ -96,19 +98,53 @@ const ProfileScreenHeader = ({ user, isMe = false }) => {
           color="grey"
           style={{ width: 25 }}
         />
-        <Text>From CUNY</Text>
+        <Text>From USA</Text>
       </View>
     </View>
   );
 };
 
 const ProfileScreen = () => {
+  const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
   const route = useRoute();
-  console.warn('User: ', route?.params?.id);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userData = await Auth.currentAuthenticatedUser();
+      const userId = route?.params?.id || userData.attributes.sub;
+      if (!userId) return;
+
+      const isMe = userId === userData.attributes.sub;
+      //  currentAuthenticatedUser is different from the dbUser
+      // create a dbUser
+      const dbUser = await DataStore.query(User, userId);
+
+      if (!dbUser) {
+        // if there is not dbUser found redirect to UpdateProfile
+        // this online happens the first time user access the profile
+        // user will have to create a profile and update it
+        // this bc AWS Cognito User Pool manage the authenticated user with email and full-name
+        // but we also need to create a user in our database for the bio, age, profile pic etc
+        // we need to connect both user by using the auth user sub id and use the same sub to create a new user in the db
+        if (isMe) {
+          navigation.navigate('Update Profile');
+        } else {
+          Alert.alert('User not found!');
+        }
+      } else {
+        setUser(dbUser);
+      }
+      DataStore.query(Post, (p) => p.postUserId('eq', userId)).then(setPosts);
+    };
+
+    fetchUser();
+  }, []);
   return (
     <View>
       <FlatList
-        data={user.posts}
+        data={posts}
         renderItem={({ item }) => <FeedPost post={item} />}
         showsHorizontalScrollIndicator={false}
         ListHeaderComponent={() => (
